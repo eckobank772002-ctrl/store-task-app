@@ -339,7 +339,7 @@ async function loadTasks() {
       >
 
       <span class="${task.completed ? "done" : ""}">
-        ${escapeHtml(task.title)}
+        ${escapeHtml(task.Title)}
       </span>
     `;
 
@@ -384,7 +384,7 @@ async function createTask() {
     await supabaseClient
       .from("Tasks")
       .insert({
-        title: title,
+        Title: title,
         assigned_user_id: employeeId,
         completed: false
       });
