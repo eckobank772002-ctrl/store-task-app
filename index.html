@@ -477,7 +477,25 @@ supabaseClient.auth.getSession()
       await startApp();
 
     }
+async function sendPasswordReset() {
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("loginMessage");
 
+  if (!email) {
+    message.innerHTML = '<div class="error">ابتدا ایمیل خود را وارد کنید.</div>';
+    return;
+  }
+
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin
+  });
+
+  if (error) {
+    message.innerHTML = '<div class="error">' + error.message + '</div>';
+  } else {
+    message.innerHTML = '<div class="success">لینک تغییر رمز به ایمیل شما ارسال شد.</div>';
+  }
+}
   });
 
 </script>
